@@ -1,16 +1,95 @@
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-class MainFrame(QtWidgets.QWidget):
-    def __init__(self):
-        super().__init__()
-        self.setupUi()
 
-    def setupUi(self):
-        self.setWindowTitle('Paint')
-        self.setFixedSize(1280,720)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.setFixedSize(1280, 720)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
+        self.graphicsView.setGeometry(QtCore.QRect(10, 140, 1260, 570))
+        self.graphicsView.setObjectName("graphicsView")
+        self.save = QtWidgets.QPushButton(self.centralwidget)
+        self.save.setGeometry(QtCore.QRect(10, 10, 71, 51))
+        self.save.setObjectName("save")
+        self.load = QtWidgets.QPushButton(self.centralwidget)
+        self.load.setGeometry(QtCore.QRect(10, 70, 71, 51))
+        self.load.setObjectName("load")
+        self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
+        self.groupBox.setGeometry(QtCore.QRect(90, 10, 161, 111))
+        self.groupBox.setObjectName("groupBox")
+        self.radioButton = QtWidgets.QRadioButton(self.groupBox)
+        self.radioButton.setGeometry(QtCore.QRect(10, 20, 108, 19))
+        self.radioButton.setObjectName("radioButton")
+        self.radioButton_2 = QtWidgets.QRadioButton(self.groupBox)
+        self.radioButton_2.setGeometry(QtCore.QRect(10, 50, 108, 19))
+        self.radioButton_2.setObjectName("radioButton_2")
+        self.radioButton_3 = QtWidgets.QRadioButton(self.groupBox)
+        self.radioButton_3.setGeometry(QtCore.QRect(80, 20, 108, 19))
+        self.radioButton_3.setObjectName("radioButton_3")
+        self.radioButton_4 = QtWidgets.QRadioButton(self.groupBox)
+        self.radioButton_4.setGeometry(QtCore.QRect(80, 50, 108, 19))
+        self.radioButton_4.setObjectName("radioButton_4")
+        self.radioButton_5 = QtWidgets.QRadioButton(self.groupBox)
+        self.radioButton_5.setGeometry(QtCore.QRect(10, 80, 108, 19))
+        self.radioButton_5.setObjectName("radioButton_5")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(360, 10, 31, 16))
+        self.label.setObjectName("label")
+        self.spinBox = QtWidgets.QSpinBox(self.centralwidget)
+        self.spinBox.setGeometry(QtCore.QRect(360, 30, 42, 22))
+        self.spinBox.setObjectName("spinBox")
+        self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
+        self.groupBox_2.setGeometry(QtCore.QRect(260, 10, 91, 111))
+        self.groupBox_2.setObjectName("groupBox_2")
+        self.radioButton_6 = QtWidgets.QRadioButton(self.groupBox_2)
+        self.radioButton_6.setGeometry(QtCore.QRect(10, 30, 108, 19))
+        self.radioButton_6.setObjectName("radioButton_6")
+        self.radioButton_7 = QtWidgets.QRadioButton(self.groupBox_2)
+        self.radioButton_7.setGeometry(QtCore.QRect(10, 60, 108, 19))
+        self.radioButton_7.setObjectName("radioButton_7")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(360, 70, 64, 15))
+        self.label_2.setObjectName("label_2")
+        self.checkBox = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox.setGeometry(QtCore.QRect(360, 90, 96, 19))
+        self.checkBox.setObjectName("checkBox")
+        self.groupBox_3 = QtWidgets.QGroupBox(self.centralwidget)
+        self.groupBox_3.setGeometry(QtCore.QRect(420, 10, 845, 111))
+        self.groupBox_3.setObjectName("groupBox_3")
+        MainWindow.setCentralWidget(self.centralwidget)
 
-app = QtWidgets.QApplication([])
-MainFrame = MainFrame()
-MainFrame.show()
-app.exec_()
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.save.setText(_translate("MainWindow", "save"))
+        self.load.setText(_translate("MainWindow", "load"))
+        self.groupBox.setTitle(_translate("MainWindow", "도형"))
+        self.radioButton.setText(_translate("MainWindow", "펜"))
+        self.radioButton_2.setText(_translate("MainWindow", "선"))
+        self.radioButton_3.setText(_translate("MainWindow", "사각형"))
+        self.radioButton_4.setText(_translate("MainWindow", "원"))
+        self.radioButton_5.setText(_translate("MainWindow", "세모"))
+        self.label.setText(_translate("MainWindow", "두께"))
+        self.groupBox_2.setTitle(_translate("MainWindow", "내부색상"))
+        self.radioButton_6.setText(_translate("MainWindow", "비우기"))
+        self.radioButton_7.setText(_translate("MainWindow", "채우기"))
+        self.label_2.setText(_translate("MainWindow", "지우개"))
+        self.checkBox.setText(_translate("MainWindow", "사용"))
+        self.groupBox_3.setTitle(_translate("MainWindow", "색상"))
+
+
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
