@@ -46,4 +46,7 @@ class Triangle(Shape):
 
     def Draw(self, img):
         pos=np.array([[self.startX, self.endY], [self.endX, self.endY],[(self.startX+self.endX)//2, self.startY]],dtype=np.int32)
-        cv2.polylines(img,[pos] ,True, self.color, self.thickness)
+        if self.thickness==-1:
+            cv2.drawContours(img, [pos], 0, self.color, -1)
+        else:
+            cv2.polylines(img, [pos], True, self.color, self.thickness)

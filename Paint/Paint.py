@@ -1,10 +1,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-import cv2
-import numpy as np
+from PyQt5.QtWidgets import *
 from Shape import *
+import cv2
 
+
+load=False
 class Ui_MainWindow(object):
     def __init__(self):
+        self.background=(255,255,255)
+        self.color=(0,0,0)
         self.shapeList=[]
         self.shape=None
         self.startX, self.startY = None, None
@@ -28,9 +32,11 @@ class Ui_MainWindow(object):
         self.save = QtWidgets.QPushButton(self.centralwidget)
         self.save.setGeometry(QtCore.QRect(10, 10, 71, 51))
         self.save.setObjectName("save")
+        self.save.clicked.connect(self.saveButtonClicked)
         self.load = QtWidgets.QPushButton(self.centralwidget)
         self.load.setGeometry(QtCore.QRect(10, 70, 71, 51))
         self.load.setObjectName("load")
+        self.load.clicked.connect(self.loadButtonClicked)
         self.shape_groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.shape_groupBox.setGeometry(QtCore.QRect(90, 10, 161, 111))
         self.shape_groupBox.setObjectName("groupBox")
@@ -76,12 +82,98 @@ class Ui_MainWindow(object):
         self.groupBox_3 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_3.setGeometry(QtCore.QRect(420, 10, 845, 111))
         self.groupBox_3.setObjectName("groupBox_3")
-        self.background_color = QtWidgets.QPushButton(self.groupBox_3)
-        self.background_color.setGeometry(QtCore.QRect(10, 30, 108, 19))
-        self.background_color.setObjectName("radioButton_8")
-        self.shape_color = QtWidgets.QPushButton(self.groupBox_3)
-        self.shape_color.setGeometry(QtCore.QRect(10, 60, 108, 19))
-        self.shape_color.setObjectName("radioButton_9")
+        self.groupBox_6 = QtWidgets.QGroupBox(self.groupBox_3)
+        self.groupBox_6.setGeometry(QtCore.QRect(330, 20, 301, 80))
+        self.groupBox_6.setObjectName("groupBox_6")
+        self.groupBox_5 = QtWidgets.QGroupBox(self.groupBox_3)
+        self.groupBox_5.setGeometry(QtCore.QRect(10, 20, 301, 80))
+        self.groupBox_5.setObjectName("groupBox_5")
+        self.BC1 = QtWidgets.QPushButton(self.groupBox_5)
+        self.BC1.setGeometry(QtCore.QRect(80, 20, 21, 21))
+        self.BC1.setObjectName("BC1")
+        self.BC2 = QtWidgets.QPushButton(self.groupBox_5)
+        self.BC2.setGeometry(QtCore.QRect(110, 20, 21, 21))
+        self.BC2.setObjectName("BC2")
+        self.BC3 = QtWidgets.QPushButton(self.groupBox_5)
+        self.BC3.setGeometry(QtCore.QRect(140, 20, 21, 21))
+        self.BC3.setObjectName("BC3")
+        self.BC4 = QtWidgets.QPushButton(self.groupBox_5)
+        self.BC4.setGeometry(QtCore.QRect(80, 50, 21, 21))
+        self.BC4.setObjectName("BC4")
+        self.BC5 = QtWidgets.QPushButton(self.groupBox_5)
+        self.BC5.setGeometry(QtCore.QRect(110, 50, 21, 21))
+        self.BC5.setObjectName("BC5")
+        self.BC6 = QtWidgets.QPushButton(self.groupBox_5)
+        self.BC6.setGeometry(QtCore.QRect(140, 50, 21, 21))
+        self.BC6.setObjectName("BC6")
+        self.BC_Btn = QtWidgets.QPushButton(self.groupBox_5)
+        self.BC_Btn.setGeometry(QtCore.QRect(10, 20, 61, 51))
+        self.BC_Btn.setText("")
+        self.BC_Btn.setObjectName("BC_Btn")
+        self.B_R = QtWidgets.QLineEdit(self.groupBox_5)
+        self.B_R.setGeometry(QtCore.QRect(200, 20, 41, 16))
+        self.B_R.setObjectName("B_R")
+        self.B_G = QtWidgets.QLineEdit(self.groupBox_5)
+        self.B_G.setGeometry(QtCore.QRect(200, 40, 41, 16))
+        self.B_G.setObjectName("B_G")
+        self.B_B = QtWidgets.QLineEdit(self.groupBox_5)
+        self.B_B.setGeometry(QtCore.QRect(200, 60, 41, 16))
+        self.B_B.setObjectName("B_B")
+        self.B_ChangeBtn = QtWidgets.QPushButton(self.groupBox_5)
+        self.B_ChangeBtn.setGeometry(QtCore.QRect(250, 20, 41, 51))
+        self.B_ChangeBtn.setObjectName("B_ChangeBtn")
+        self.label_3 = QtWidgets.QLabel(self.groupBox_5)
+        self.label_3.setGeometry(QtCore.QRect(180, 20, 21, 16))
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.groupBox_5)
+        self.label_4.setGeometry(QtCore.QRect(180, 40, 21, 16))
+        self.label_4.setObjectName("label_4")
+        self.label_5 = QtWidgets.QLabel(self.groupBox_5)
+        self.label_5.setGeometry(QtCore.QRect(180, 60, 21, 16))
+        self.label_5.setObjectName("label_5")
+        self.SC2 = QtWidgets.QPushButton(self.groupBox_6)
+        self.SC2.setGeometry(QtCore.QRect(110, 20, 21, 21))
+        self.SC2.setObjectName("SC2")
+        self.S_R = QtWidgets.QLineEdit(self.groupBox_6)
+        self.S_R.setGeometry(QtCore.QRect(200, 20, 41, 16))
+        self.S_R.setObjectName("S_R")
+        self.S_ChangeBtn = QtWidgets.QPushButton(self.groupBox_6)
+        self.S_ChangeBtn.setGeometry(QtCore.QRect(250, 20, 41, 51))
+        self.S_ChangeBtn.setObjectName("S_ChangeBtn")
+        self.SC4 = QtWidgets.QPushButton(self.groupBox_6)
+        self.SC4.setGeometry(QtCore.QRect(80, 50, 21, 21))
+        self.SC4.setObjectName("SC4")
+        self.SC5 = QtWidgets.QPushButton(self.groupBox_6)
+        self.SC5.setGeometry(QtCore.QRect(110, 50, 21, 21))
+        self.SC5.setObjectName("SC5")
+        self.SC1 = QtWidgets.QPushButton(self.groupBox_6)
+        self.SC1.setGeometry(QtCore.QRect(80, 20, 21, 21))
+        self.SC1.setObjectName("SC1")
+        self.label_7 = QtWidgets.QLabel(self.groupBox_6)
+        self.label_7.setGeometry(QtCore.QRect(180, 60, 21, 16))
+        self.label_7.setObjectName("label_7")
+        self.SC_Btn = QtWidgets.QPushButton(self.groupBox_6)
+        self.SC_Btn.setGeometry(QtCore.QRect(10, 20, 61, 51))
+        self.SC_Btn.setText("")
+        self.SC_Btn.setObjectName("SC_Btn")
+        self.SC3 = QtWidgets.QPushButton(self.groupBox_6)
+        self.SC3.setGeometry(QtCore.QRect(140, 20, 21, 21))
+        self.SC3.setObjectName("SC3")
+        self.S_G = QtWidgets.QLineEdit(self.groupBox_6)
+        self.S_G.setGeometry(QtCore.QRect(200, 40, 41, 16))
+        self.S_G.setObjectName("S_G")
+        self.label_6 = QtWidgets.QLabel(self.groupBox_6)
+        self.label_6.setGeometry(QtCore.QRect(180, 20, 21, 16))
+        self.label_6.setObjectName("label_6")
+        self.S_B = QtWidgets.QLineEdit(self.groupBox_6)
+        self.S_B.setGeometry(QtCore.QRect(200, 60, 41, 16))
+        self.S_B.setObjectName("S_B")
+        self.SC6 = QtWidgets.QPushButton(self.groupBox_6)
+        self.SC6.setGeometry(QtCore.QRect(140, 50, 21, 21))
+        self.SC6.setObjectName("SC6")
+        self.label_8 = QtWidgets.QLabel(self.groupBox_6)
+        self.label_8.setGeometry(QtCore.QRect(180, 40, 21, 16))
+        self.label_8.setObjectName("label_8")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -94,7 +186,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "그림판"))
         self.save.setText(_translate("MainWindow", "save"))
         self.load.setText(_translate("MainWindow", "load"))
         self.shape_groupBox.setTitle(_translate("MainWindow", "도형"))
@@ -110,8 +202,16 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "지우개"))
         self.eraser.setText(_translate("MainWindow", "사용"))
         self.groupBox_3.setTitle(_translate("MainWindow", "색상"))
-        self.background_color.setText(_translate("MainWindow", "배경 색상"))
-        self.shape_color.setText(_translate("MainWindow", "도형 색상"))
+        self.groupBox_6.setTitle(_translate("MainWindow", "도형"))
+        self.groupBox_5.setTitle(_translate("MainWindow", "배경"))
+        self.B_ChangeBtn.setText(_translate("MainWindow", "변경"))
+        self.label_3.setText(_translate("MainWindow", "R:"))
+        self.label_4.setText(_translate("MainWindow", "G:"))
+        self.label_5.setText(_translate("MainWindow", "B:"))
+        self.S_ChangeBtn.setText(_translate("MainWindow", "변경"))
+        self.label_7.setText(_translate("MainWindow", "B:"))
+        self.label_6.setText(_translate("MainWindow", "R:"))
+        self.label_8.setText(_translate("MainWindow", "G:"))
 
     def canvas_mousePressEvent(self, e):
         self.startX = e.x()
@@ -126,19 +226,25 @@ class Ui_MainWindow(object):
         else:
             thickness=self.spinBox.value()
 
+        if self.eraser.isChecked():
+            color=self.background
+        else:
+            color=self.color
+
         if self.line.isChecked():
-            self.shapeList.append(Line(self.startX, self.startY, self.endX, self.endY, (0,0,0), self.spinBox.value()))
+            self.shapeList.append(Line(self.startX, self.startY, self.endX, self.endY, color, self.spinBox.value()))
 
         if self.triangle.isChecked():
-            self.shapeList.append(Triangle(self.startX, self.startY, self.endX, self.endY, (0,0,0), self.spinBox.value()))
+            self.shapeList.append(Triangle(self.startX, self.startY, self.endX, self.endY, color, thickness))
 
         if self.rect.isChecked():
-            self.shapeList.append(Rect(self.startX, self.startY, self.endX, self.endY, (0,0,0), thickness))
+            self.shapeList.append(Rect(self.startX, self.startY, self.endX, self.endY, color, thickness))
 
         if self.circle.isChecked():
-            self.shapeList.append(Circle(self.startX, self.startY, self.endX, self.endY, (0,0,0), thickness))
+            self.shapeList.append(Circle(self.startX, self.startY, self.endX, self.endY, color, thickness))
 
         self.canvas.repaint()
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
         self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
         self.canvas.setPixmap(self.pixmap)
 
@@ -151,18 +257,23 @@ class Ui_MainWindow(object):
         else:
             thickness=self.spinBox.value()
 
+        if self.eraser.isChecked():
+            color=self.background
+        else:
+            color=self.color
+
         if self.pen.isChecked():
-            self.shape = Shape(self.endX, self.endY, (0, 0, 0), self.spinBox.value())
+            self.shape = Shape(self.endX, self.endY, color, self.spinBox.value())
             self.shape.Draw(self.img)
             self.shapeList.append(self.shape)
         if self.line.isChecked():
-            self.shape=Line(self.startX, self.startY, self.endX, self.endY, (0,0,0), self.spinBox.value())
+            self.shape=Line(self.startX, self.startY, self.endX, self.endY, color, self.spinBox.value())
         if self.rect.isChecked():
-            self.shape=Rect(self.startX, self.startY, self.endX, self.endY, (0,0,0), thickness)
+            self.shape=Rect(self.startX, self.startY, self.endX, self.endY, color, thickness)
         if self.circle.isChecked():
-            self.shape=Circle(self.startX, self.startY, self.endX, self.endY, (0,0,0), thickness)
+            self.shape=Circle(self.startX, self.startY, self.endX, self.endY, color, thickness)
         if self.triangle.isChecked():
-            self.shape=Triangle(self.startX, self.startY, self.endX, self.endY, (0,0,0), self.spinBox.value())
+            self.shape=Triangle(self.startX, self.startY, self.endX, self.endY, color, thickness)
 
         self.canvas.repaint()
         self.shape.Draw(self.img)
@@ -174,6 +285,15 @@ class Ui_MainWindow(object):
         self.img = np.full((570, 1260, 3), 255, dtype=np.uint8)
         for shape in self.shapeList:
             shape.Draw(self.img)
+
+    def loadButtonClicked(self):
+        Path=QFileDialog.getOpenFileName()
+        self.pixmap = QtGui.QPixmap(Path[0])
+        self.canvas.setPixmap(self.pixmap)
+        self.shapeList=[]
+
+    def saveButtonClicked(self):
+        cv2.imwrite('C:/Users/User/Desktop/test.jpg', self.img)
 
 
 if __name__ == "__main__":
