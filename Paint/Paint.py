@@ -91,25 +91,32 @@ class Ui_MainWindow(object):
         self.BC1 = QtWidgets.QPushButton(self.groupBox_5)
         self.BC1.setGeometry(QtCore.QRect(80, 20, 21, 21))
         self.BC1.setObjectName("BC1")
+        self.BC1.setStyleSheet("background-color: white");
         self.BC2 = QtWidgets.QPushButton(self.groupBox_5)
         self.BC2.setGeometry(QtCore.QRect(110, 20, 21, 21))
         self.BC2.setObjectName("BC2")
+        self.BC2.setStyleSheet("background-color: red");
         self.BC3 = QtWidgets.QPushButton(self.groupBox_5)
         self.BC3.setGeometry(QtCore.QRect(140, 20, 21, 21))
         self.BC3.setObjectName("BC3")
+        self.BC3.setStyleSheet("background-color: yellow");
         self.BC4 = QtWidgets.QPushButton(self.groupBox_5)
         self.BC4.setGeometry(QtCore.QRect(80, 50, 21, 21))
         self.BC4.setObjectName("BC4")
+        self.BC4.setStyleSheet("background-color: balck");
         self.BC5 = QtWidgets.QPushButton(self.groupBox_5)
         self.BC5.setGeometry(QtCore.QRect(110, 50, 21, 21))
         self.BC5.setObjectName("BC5")
+        self.BC5.setStyleSheet("background-color: green");
         self.BC6 = QtWidgets.QPushButton(self.groupBox_5)
         self.BC6.setGeometry(QtCore.QRect(140, 50, 21, 21))
         self.BC6.setObjectName("BC6")
+        self.BC6.setStyleSheet("background-color: blue");
         self.BC_Btn = QtWidgets.QPushButton(self.groupBox_5)
         self.BC_Btn.setGeometry(QtCore.QRect(10, 20, 61, 51))
         self.BC_Btn.setText("")
         self.BC_Btn.setObjectName("BC_Btn")
+        self.BC_Btn.setStyleSheet("background-color: white");
         self.B_R = QtWidgets.QLineEdit(self.groupBox_5)
         self.B_R.setGeometry(QtCore.QRect(200, 20, 41, 16))
         self.B_R.setObjectName("B_R")
@@ -134,6 +141,7 @@ class Ui_MainWindow(object):
         self.SC2 = QtWidgets.QPushButton(self.groupBox_6)
         self.SC2.setGeometry(QtCore.QRect(110, 20, 21, 21))
         self.SC2.setObjectName("SC2")
+        self.SC2.setStyleSheet("background-color: red");
         self.S_R = QtWidgets.QLineEdit(self.groupBox_6)
         self.S_R.setGeometry(QtCore.QRect(200, 20, 41, 16))
         self.S_R.setObjectName("S_R")
@@ -143,12 +151,15 @@ class Ui_MainWindow(object):
         self.SC4 = QtWidgets.QPushButton(self.groupBox_6)
         self.SC4.setGeometry(QtCore.QRect(80, 50, 21, 21))
         self.SC4.setObjectName("SC4")
+        self.SC4.setStyleSheet("background-color: balck");
         self.SC5 = QtWidgets.QPushButton(self.groupBox_6)
         self.SC5.setGeometry(QtCore.QRect(110, 50, 21, 21))
         self.SC5.setObjectName("SC5")
+        self.SC5.setStyleSheet("background-color: green");
         self.SC1 = QtWidgets.QPushButton(self.groupBox_6)
         self.SC1.setGeometry(QtCore.QRect(80, 20, 21, 21))
         self.SC1.setObjectName("SC1")
+        self.SC1.setStyleSheet("background-color: white");
         self.label_7 = QtWidgets.QLabel(self.groupBox_6)
         self.label_7.setGeometry(QtCore.QRect(180, 60, 21, 16))
         self.label_7.setObjectName("label_7")
@@ -156,9 +167,11 @@ class Ui_MainWindow(object):
         self.SC_Btn.setGeometry(QtCore.QRect(10, 20, 61, 51))
         self.SC_Btn.setText("")
         self.SC_Btn.setObjectName("SC_Btn")
+        self.SC_Btn.setStyleSheet("background-color: black");
         self.SC3 = QtWidgets.QPushButton(self.groupBox_6)
         self.SC3.setGeometry(QtCore.QRect(140, 20, 21, 21))
         self.SC3.setObjectName("SC3")
+        self.SC3.setStyleSheet("background-color: yellow");
         self.S_G = QtWidgets.QLineEdit(self.groupBox_6)
         self.S_G.setGeometry(QtCore.QRect(200, 40, 41, 16))
         self.S_G.setObjectName("S_G")
@@ -171,6 +184,7 @@ class Ui_MainWindow(object):
         self.SC6 = QtWidgets.QPushButton(self.groupBox_6)
         self.SC6.setGeometry(QtCore.QRect(140, 50, 21, 21))
         self.SC6.setObjectName("SC6")
+        self.SC6.setStyleSheet("background-color: blue");
         self.label_8 = QtWidgets.QLabel(self.groupBox_6)
         self.label_8.setGeometry(QtCore.QRect(180, 40, 21, 16))
         self.label_8.setObjectName("label_8")
@@ -178,6 +192,20 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.BC1.clicked.connect(self.BC1_clicked)
+        self.BC2.clicked.connect(self.BC2_clicked)
+        self.BC3.clicked.connect(self.BC3_clicked)
+        self.BC4.clicked.connect(self.BC4_clicked)
+        self.BC5.clicked.connect(self.BC5_clicked)
+        self.BC6.clicked.connect(self.BC6_clicked)
+
+        self.SC1.clicked.connect(self.SC1_clicked)
+        self.SC2.clicked.connect(self.SC2_clicked)
+        self.SC3.clicked.connect(self.SC3_clicked)
+        self.SC4.clicked.connect(self.SC4_clicked)
+        self.SC5.clicked.connect(self.SC5_clicked)
+        self.SC6.clicked.connect(self.SC6_clicked)
 
         self.canvas.mouseMoveEvent = self.canvas_mouseMoveEvent
         self.canvas.mousePressEvent = self.canvas_mousePressEvent
@@ -282,7 +310,7 @@ class Ui_MainWindow(object):
         self.canvas.setPixmap(self.pixmap)
 
     def canvas_repaint(self):
-        self.img = np.full((570, 1260, 3), 255, dtype=np.uint8)
+        self.img = np.full((570, 1260, 3), self.background, dtype=np.uint8)
         for shape in self.shapeList:
             shape.Draw(self.img)
 
@@ -295,6 +323,113 @@ class Ui_MainWindow(object):
     def saveButtonClicked(self):
         cv2.imwrite('C:/Users/User/Desktop/test.jpg', self.img)
 
+    def BC1_clicked(self):
+        self.BC_Btn.setStyleSheet("background-color: white")
+        self.background = (255, 255, 255)
+        self.shape.Draw(self.img)
+        self.canvas.repaint()
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def BC2_clicked(self):
+        self.BC_Btn.setStyleSheet("background-color: red")
+        self.background = (255, 0, 0)
+        self.canvas.repaint()
+        self.shape.Draw(self.img)
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def BC3_clicked(self):
+        self.BC_Btn.setStyleSheet("background-color: yellow")
+        self.background = (255, 255, 0)
+        self.canvas.repaint()
+        self.shape.Draw(self.img)
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def BC4_clicked(self):
+        self.BC_Btn.setStyleSheet("background-color: black")
+        self.background = (0, 0, 0)
+        self.canvas.repaint()
+        self.shape.Draw(self.img)
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def BC5_clicked(self):
+        self.BC_Btn.setStyleSheet("background-color: green")
+        self.background = (0, 255, 0)
+        self.canvas.repaint()
+        self.shape.Draw(self.img)
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def BC6_clicked(self):
+        self.BC_Btn.setStyleSheet("background-color: blue")
+        self.background = (0, 0, 255)
+        self.canvas.repaint()
+        self.shape.Draw(self.img)
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def SC1_clicked(self):
+        self.SC_Btn.setStyleSheet("background-color: white")
+        self.color = (255, 255, 255)
+        self.shape.Draw(self.img)
+        self.canvas.repaint()
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def SC2_clicked(self):
+        self.SC_Btn.setStyleSheet("background-color: red")
+        self.color = (255, 0, 0)
+        self.canvas.repaint()
+        self.shape.Draw(self.img)
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def SC3_clicked(self):
+        self.SC_Btn.setStyleSheet("background-color: yellow")
+        self.color = (255, 255, 0)
+        self.canvas.repaint()
+        self.shape.Draw(self.img)
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def SC4_clicked(self):
+        self.SC_Btn.setStyleSheet("background-color: black")
+        self.color = (0, 0, 0)
+        self.canvas.repaint()
+        self.shape.Draw(self.img)
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def SC5_clicked(self):
+        self.SC_Btn.setStyleSheet("background-color: green")
+        self.color = (0, 255, 0)
+        self.canvas.repaint()
+        self.shape.Draw(self.img)
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
+
+    def SC6_clicked(self):
+        self.SC_Btn.setStyleSheet("background-color: blue")
+        self.color = (0, 0, 255)
+        self.canvas.repaint()
+        self.shape.Draw(self.img)
+        self.qImg = QtGui.QImage(self.img.data, self.w, self.h, self.w * self.c, QtGui.QImage.Format_RGB888)
+        self.pixmap = QtGui.QPixmap.fromImage(self.qImg)
+        self.canvas.setPixmap(self.pixmap)
 
 if __name__ == "__main__":
     import sys
