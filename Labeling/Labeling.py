@@ -84,7 +84,7 @@ class MainFrame(QtWidgets.QWidget):
         for shape in self.shapeList:
             s=shape.copy()
             s.pop(4)
-            txt = " ".join(map(str, s)) + "\n"
+            txt = ",".join(map(str, s)) + "\n"
             f.write(txt)
         f.close()
         num=self.p[1]-1
@@ -105,7 +105,7 @@ class MainFrame(QtWidgets.QWidget):
                 f = open(fname, 'r')
                 line = f.readline()
                 while line:
-                    line = list(line.split())
+                    line = list(line.split(","))
                     for i in range(4):
                         line[i] = int(line[i])
                     if line[-1] == "dog":
@@ -128,7 +128,7 @@ class MainFrame(QtWidgets.QWidget):
         for shape in self.shapeList:
             s=shape.copy()
             s.pop(4)
-            txt=" ".join(map(str,s))+"\n"
+            txt=",".join(map(str,s))+"\n"
             f.write(txt)
         f.close()
         num = self.p[1] + 1
@@ -149,7 +149,7 @@ class MainFrame(QtWidgets.QWidget):
                 f = open(fname, 'r')
                 line = f.readline()
                 while line:
-                    line = list(line.split())
+                    line = list(line.split(","))
                     for i in range(4):
                         line[i] = int(line[i])
                     if line[-1] == "dog":
@@ -175,7 +175,7 @@ class MainFrame(QtWidgets.QWidget):
         Path = QFileDialog.getExistingDirectory()
         self.p =[Path,0]
         files = os.listdir(Path)
-        self.fileList = [file for file in files if file.endswith(".png")]
+        self.fileList = [file for file in files if file.endswith(".jpg")]
         self.fileList = natsort.natsorted(self.fileList)
         self.painter=None
         self.path=Path+'/'+self.fileList[0]
@@ -191,7 +191,7 @@ class MainFrame(QtWidgets.QWidget):
             f = open(fname, 'r')
             line = f.readline()
             while line:
-                line = list(line.split())
+                line = list(line.split(","))
                 for i in range(4):
                     line[i] = int(line[i])
                 if line[-1] == "dog":
