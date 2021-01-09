@@ -78,15 +78,16 @@ class MainFrame(QtWidgets.QWidget):
         self.rightMoveBtn.clicked.connect(self.rightMoveBtn_clicked)
 
     def leftMoveBtn_clicked(self):
-        fname = self.path
-        fname = "".join(fname[:-3]) + "txt"
-        f = open(fname, mode='wt', encoding='utf-8')
+        if len(self.shapeList)>0:
+            fname = self.path
+            fname = "".join(fname[:-3]) + "txt"
+            f = open(fname, mode='wt', encoding='utf-8')
         for shape in self.shapeList:
             s=shape.copy()
             s.pop(4)
             txt = ",".join(map(str, s)) + "\n"
             f.write(txt)
-        f.close()
+            f.close()
         num=self.p[1]-1
         if num >= 0 :
             self.p[1]=num
@@ -103,7 +104,7 @@ class MainFrame(QtWidgets.QWidget):
             fname = "".join(fname[:-3]) + "txt"
             if os.path.exists(fname):
                 f = open(fname, 'r')
-                line = f.readline()
+                line = f.readline().rstrip()
                 while line:
                     line = list(line.split(","))
                     for i in range(4):
@@ -122,15 +123,16 @@ class MainFrame(QtWidgets.QWidget):
             self.image.setPixmap(self.pixmap)
 
     def rightMoveBtn_clicked(self):
-        fname=self.path
-        fname="".join(fname[:-3])+"txt"
-        f = open(fname, mode='wt', encoding='utf-8')
+        if len(self.shapeList)>0:
+            fname = self.path
+            fname = "".join(fname[:-3]) + "txt"
+            f = open(fname, mode='wt', encoding='utf-8')
         for shape in self.shapeList:
             s=shape.copy()
             s.pop(4)
             txt=",".join(map(str,s))+"\n"
             f.write(txt)
-        f.close()
+            f.close()
         num = self.p[1] + 1
         if num < len(self.fileList):
             self.p[1] = num
@@ -147,7 +149,7 @@ class MainFrame(QtWidgets.QWidget):
             fname = "".join(fname[:-3]) + "txt"
             if os.path.exists(fname):
                 f = open(fname, 'r')
-                line = f.readline()
+                line = f.readline().rstrip()
                 while line:
                     line = list(line.split(","))
                     for i in range(4):
@@ -189,9 +191,10 @@ class MainFrame(QtWidgets.QWidget):
         fname = "".join(fname[:-3]) + "txt"
         if os.path.exists(fname):
             f = open(fname, 'r')
-            line = f.readline()
+            line = f.readline().rstrip()
+            print(line)
             while line:
-                line = list(line.split(","))
+                line = list(line.split(",").strip())
                 for i in range(4):
                     line[i] = int(line[i])
                 if line[-1] == "dog":
