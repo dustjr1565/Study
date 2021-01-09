@@ -194,7 +194,7 @@ class MainFrame(QtWidgets.QWidget):
             line = f.readline().rstrip()
             print(line)
             while line:
-                line = list(line.split(",").strip())
+                line = list(line.split(","))
                 for i in range(4):
                     line[i] = int(line[i])
                 if line[-1] == "dog":
