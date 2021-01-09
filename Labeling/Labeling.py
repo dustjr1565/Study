@@ -78,16 +78,15 @@ class MainFrame(QtWidgets.QWidget):
         self.rightMoveBtn.clicked.connect(self.rightMoveBtn_clicked)
 
     def leftMoveBtn_clicked(self):
-        if len(self.shapeList)>0:
-            fname = self.path
-            fname = "".join(fname[:-3]) + "txt"
-            f = open(fname, mode='wt', encoding='utf-8')
+        fname = self.path
+        fname = "".join(fname[:-3]) + "txt"
+        f = open(fname, mode='wt', encoding='utf-8')
         for shape in self.shapeList:
             s=shape.copy()
             s.pop(4)
             txt = ",".join(map(str, s)) + "\n"
             f.write(txt)
-            f.close()
+        f.close()
         num=self.p[1]-1
         if num >= 0 :
             self.p[1]=num
@@ -118,21 +117,20 @@ class MainFrame(QtWidgets.QWidget):
                     self.painter.drawRect(line[0], line[1], line[2] - line[0], line[3] - line[1])
                     self.painter.drawText(line[0], line[1], line[-1])
                     self.shapeList.append(line)
-                    line = f.readline()
+                    line = f.readline().rstrip()
                 f.close()
             self.image.setPixmap(self.pixmap)
 
     def rightMoveBtn_clicked(self):
-        if len(self.shapeList)>0:
-            fname = self.path
-            fname = "".join(fname[:-3]) + "txt"
-            f = open(fname, mode='wt', encoding='utf-8')
+        fname = self.path
+        fname = "".join(fname[:-3]) + "txt"
+        f = open(fname, mode='wt', encoding='utf-8')
         for shape in self.shapeList:
             s=shape.copy()
             s.pop(4)
             txt=",".join(map(str,s))+"\n"
             f.write(txt)
-            f.close()
+        f.close()
         num = self.p[1] + 1
         if num < len(self.fileList):
             self.p[1] = num
@@ -151,6 +149,7 @@ class MainFrame(QtWidgets.QWidget):
                 f = open(fname, 'r')
                 line = f.readline().rstrip()
                 while line:
+                    print(line)
                     line = list(line.split(","))
                     for i in range(4):
                         line[i] = int(line[i])
@@ -164,6 +163,7 @@ class MainFrame(QtWidgets.QWidget):
                     self.painter.drawText(line[0], line[1], line[-1])
                     self.shapeList.append(line)
                     line = f.readline()
+                    print(line)
                 f.close()
             self.image.setPixmap(self.pixmap)
 
@@ -206,7 +206,7 @@ class MainFrame(QtWidgets.QWidget):
                 self.painter.drawRect(line[0], line[1], line[2] - line[0], line[3] - line[1])
                 self.painter.drawText(line[0], line[1], line[-1])
                 self.shapeList.append(line)
-                line = f.readline()
+                line = f.readline().rstrip()
             f.close()
         self.image.setPixmap(self.pixmap)
 
