@@ -162,7 +162,7 @@ class MainFrame(QtWidgets.QWidget):
                     self.painter.drawRect(line[0], line[1], line[2] - line[0], line[3] - line[1])
                     self.painter.drawText(line[0], line[1], line[-1])
                     self.shapeList.append(line)
-                    line = f.readline()
+                    line = f.readline().rstrip()
                     print(line)
                 f.close()
             self.image.setPixmap(self.pixmap)
@@ -192,8 +192,8 @@ class MainFrame(QtWidgets.QWidget):
         if os.path.exists(fname):
             f = open(fname, 'r')
             line = f.readline().rstrip()
-            print(line)
             while line:
+                print(line)
                 line = list(line.split(","))
                 for i in range(4):
                     line[i] = int(line[i])
